@@ -1,6 +1,7 @@
 #zawiw-bp-memberlist .user {
     text-align: center;
     margin-bottom: 15px;
+    margin-left: 0px;
 }
 #zawiw-bp-memberlist .avatar {
     float: none;
