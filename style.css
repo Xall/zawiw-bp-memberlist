@@ -1,0 +1,14 @@
+#zawiw-bp-memberlist .user {
+    text-align: center;
+    margin-bottom: 15px;
+}
+#zawiw-bp-memberlist .avatar {
+    float: none;
+}
+#zawiw-bp-memberlist .email {
+    font-style: italic;
+    font-size: 80%;
+}
+#zawiw-bp-memberlist .email a {
+    color: #aaa !important;
+}
