@@ -20,6 +20,17 @@ function zawiw_bp_memberlist_shortcode( $atts ) {
 
     // start buffered output
     ob_start();
+
+    // check for login
+    if ( !is_user_logged_in() ) {
+        echo '<p>Sie müssen angemeldet sein, um diese Funktion zu nutzen.</p>';
+        // end buffered output
+        $output = ob_get_contents();
+        ob_end_clean();
+
+        return $output;
+    }
+
     ?>
     <div id="zawiw-bp-memberlist">
     <?php
