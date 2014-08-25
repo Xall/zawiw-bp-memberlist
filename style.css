@@ -13,3 +13,10 @@
 #zawiw-bp-memberlist .email a {
     color: #aaa !important;
 }
+#zawiw-bp-memberlist-search {
+    margin-bottom: 20px;
+}
+body{
+    overflow-y: scroll;
+    overflow: -moz-scrollbars-vertical;
+}
