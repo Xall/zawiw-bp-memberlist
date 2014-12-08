@@ -3,7 +3,7 @@
 Plugin Name: ZAWiW BuddyPress Memberlist
 Plugin URI:
 Description: Liste aus Teilnehmern an einer BuddyPress Community, beschränkt auf die aktive Seite
-Version: 1.1
+Version: 1.1.1
 Author: Simon Volpert, Sascha Winkelhofer
 Author URI: http://svolpert.eu
 License: MIT
@@ -38,6 +38,7 @@ function zawiw_bp_memberlist_shortcode( $atts ) {
     <?php
     // Filters members to only include those of one site (in case of multisite)
     if ( bp_has_members( 'include=' . zawiw_bp_memberlist_get_users() ) ):?>
+	<?php bp_has_members('per_page=false'); ?>
         <?php while ( bp_members() ) : bp_the_member(); ?>
 
         <div class="user one-third">
