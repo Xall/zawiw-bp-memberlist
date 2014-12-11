@@ -3,7 +3,7 @@
 Plugin Name: ZAWiW BuddyPress Memberlist
 Plugin URI:
 Description: Liste aus Teilnehmern an einer BuddyPress Community, beschränkt auf die aktive Seite
-Version: 1.1.1
+Version: 1.1.2
 Author: Simon Volpert, Sascha Winkelhofer
 Author URI: http://svolpert.eu
 License: MIT
@@ -31,16 +31,19 @@ function zawiw_bp_memberlist_shortcode( $atts ) {
         return $output;
     }
     ?>
-
     <input id="zawiw-bp-memberlist-search" placeholder="Suche" type="text">
-
     <div id="zawiw-bp-memberlist" >
     <?php
     // Filters members to only include those of one site (in case of multisite)
-    if ( bp_has_members( 'include=' . zawiw_bp_memberlist_get_users() ) ):?>
-	<?php bp_has_members('per_page=false'); ?>
-        <?php while ( bp_members() ) : bp_the_member(); ?>
 
+    if ( bp_has_members() ):
+	   bp_has_members('per_page=false');
+?>
+        <?php while ( bp_members() ) : bp_the_member(); ?>
+	<?php 
+		// Checks if user belongs to blog
+		if(!is_user_member_of_blog( bp_get_member_user_id() ))
+			continue; ?>
         <div class="user one-third">
             <a href="<?php bp_member_permalink() ?>">
                 <div class="avatar"><?php bp_member_avatar(); ?></div>
@@ -61,20 +64,6 @@ function zawiw_bp_memberlist_shortcode( $atts ) {
     ob_end_clean();
 
     return $output;
-
-}
-
-// Returns a comma seperated list of user ids
-function zawiw_bp_memberlist_get_users(){
-    $userList = "";
-    $users = get_users();
-    foreach($users as $user){
-        // append userID and comma
-        $userList .= $user->ID.",";
-    }
-    // Trims trailing comma
-    $userList = rtrim($userList, ",");
-    return $userList;
 
 }
 
