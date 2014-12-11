@@ -37,7 +37,9 @@ function zawiw_bp_memberlist_shortcode( $atts ) {
     <div id="zawiw-bp-memberlist" >
     <?php
     // Filters members to only include those of one site (in case of multisite)
-    if ( bp_has_members( 'include=' . zawiw_bp_memberlist_get_users() ) ):?>
+    if ( bp_has_members( 'include=' . zawiw_bp_memberlist_get_users() ) ):
+	bp_has_members('per_page=false');
+?>
         <?php while ( bp_members() ) : bp_the_member(); ?>
 
         <div class="user one-third">
@@ -66,7 +68,7 @@ function zawiw_bp_memberlist_shortcode( $atts ) {
 // Returns a comma seperated list of user ids
 function zawiw_bp_memberlist_get_users(){
     $userList = "";
-    $users = get_users();
+    $users = get_users( 'blog_id' => get_current_blog_id());
     foreach($users as $user){
         // append userID and comma
         $userList .= $user->ID.",";
